@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Table(name = "Producto")
 public class ProductEntity {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "nombre", nullable = false, length = 100)
@@ -31,7 +31,7 @@ public class ProductEntity {
     @Column(name = "categoria", length = 50)
     private String category;
 
-    @Column(name = "codigo",nullable = false, unique = true, length = 50)
+    @Column(name = "codigo", nullable = false, unique = true, length = 50)
     private String code;
 
     @Column(name = "fechaCreacion", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
