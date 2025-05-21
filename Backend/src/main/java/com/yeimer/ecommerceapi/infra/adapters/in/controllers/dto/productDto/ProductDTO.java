@@ -19,4 +19,5 @@ public class ProductDTO {
     private String category;
     private String code;
     private LocalDateTime dateCreation;
+    private boolean isActive;
 }

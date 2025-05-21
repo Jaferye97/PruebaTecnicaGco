@@ -14,6 +14,7 @@ public class ProductEntityMapper {
                 .category(entity.getCategory())
                 .code(entity.getCode())
                 .dateCreation(entity.getDateCreation())
+                .isActive(entity.isActive())
                 .build();
     }
 
@@ -28,6 +29,7 @@ public class ProductEntityMapper {
         entity.setCategory(domain.getCategory());
         entity.setCode(domain.getCode());
         entity.setDateCreation(domain.getDateCreation());
+        entity.setActive(domain.isActive());
         return entity;
     }
 }

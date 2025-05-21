@@ -37,8 +37,12 @@ public class ProductEntity {
     @Column(name = "fechaCreacion", updatable = false)
     private LocalDateTime dateCreation;
 
+    @Column(name = "activo")
+    private boolean isActive;
+
     @PrePersist
     protected void onCreate() {
         this.dateCreation = LocalDateTime.now();
+        this.isActive = true;
     }
 }

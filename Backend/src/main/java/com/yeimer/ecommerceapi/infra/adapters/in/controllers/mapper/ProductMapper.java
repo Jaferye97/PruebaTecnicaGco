@@ -15,6 +15,7 @@ public class ProductMapper {
                 .category(product.getCategory())
                 .code(product.getCode())
                 .dateCreation(product.getDateCreation())
+                .isActive(product.isActive())
                 .build();
     }
 
@@ -28,6 +29,7 @@ public class ProductMapper {
                 .category(productDTO.getCategory())
                 .code(productDTO.getCode())
                 .dateCreation(productDTO.getDateCreation())
+                .isActive(productDTO.isActive())
                 .build();
     }
 }
