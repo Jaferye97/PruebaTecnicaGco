@@ -10,8 +10,9 @@ public interface ProductRepositoryPort {
     Optional<Product> findById(Long id);
     List<Product> getAll();
     Product update(Product product);
-    Product toggleIsActiveById(Long id);
     List<Product> findByCategoryContaining(String category);
     List<Product> findByNameContaining(String name);
     List<Product> findByCodeContaining(String code);
+    List<Product> findByCode(String code);
+    boolean existsById (long id);
 }

@@ -11,4 +11,6 @@ public interface SpringProductRepository extends JpaRepository<ProductEntity, Lo
     List<ProductEntity> findByNameContaining(String name);
 
     List<ProductEntity> findByCodeContaining(String code);
+
+    List<ProductEntity> findByCode(String code);
 }

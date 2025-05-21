@@ -3,6 +3,8 @@ package com.yeimer.ecommerceapi.application.services;
 import com.yeimer.ecommerceapi.application.ports.ProductRepositoryPort;
 import com.yeimer.ecommerceapi.application.useCases.Product.*;
 import com.yeimer.ecommerceapi.domain.pojos.Product;
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +29,12 @@ public class ProductServiceImpl implements
 
     @Override
     public Product save(Product product) {
+        List<Product> productWithSameCode = productRepositoryPort.findByCode(product.getCode());
+
+        if((long) productWithSameCode.size() > 0){
+            throw new EntityExistsException("Product with same code already exists");
+        }
+
         return productRepositoryPort.save(product);
     }
 
@@ -37,6 +45,16 @@ public class ProductServiceImpl implements
 
     @Override
     public Product update(Product product) {
+        if(productRepositoryPort.existsById(product.getId())){
+            throw new EntityNotFoundException("Product not found with id: " + product.getId());
+        }
+
+        List<Product> productWithSameCode = productRepositoryPort.findByCode(product.getCode());
+
+        if(productWithSameCode.stream().anyMatch(p -> p.getId() != product.getId())){
+            throw new EntityExistsException("Product with same code already exists");
+        }
+
         return productRepositoryPort.update(product);
     }
 
@@ -47,7 +65,14 @@ public class ProductServiceImpl implements
 
     @Override
     public Product toggleIsActiveById(Long id) {
-        return productRepositoryPort.toggleIsActiveById(id);
+        Optional<Product> product = productRepositoryPort.findById(id);
+
+        if(product.isEmpty()){
+            throw new EntityNotFoundException("Product not found with id: " + id);
+        }
+
+        product.get().setActive(!product.get().isActive());
+        return productRepositoryPort.update(product.get());
     }
 
     @Override
