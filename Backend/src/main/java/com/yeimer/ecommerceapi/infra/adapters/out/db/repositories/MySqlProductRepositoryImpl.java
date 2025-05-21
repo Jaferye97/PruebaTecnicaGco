@@ -41,6 +41,30 @@ public class MySqlProductRepositoryImpl implements ProductRepositoryPort {
     }
 
     @Override
+    public List<Product> findByCategoryContaining(String category) {
+        return springProductRepository.findByCategoryContaining(category)
+                .stream()
+                .map(ProductEntityMapper::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> findByNameContaining(String name) {
+        return springProductRepository.findByNameContaining(name)
+                .stream()
+                .map(ProductEntityMapper::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> findByCodeContaining(String code) {
+        return springProductRepository.findByCodeContaining(code)
+                .stream()
+                .map(ProductEntityMapper::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Product update(Product product) {
         if (!springProductRepository.existsById((long) product.getId())) {
             throw new EntityNotFoundException("Product not found with id: " + product.getId());

@@ -9,7 +9,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProductServiceImpl implements CreateProduct, UpdateProduct, GetProductById, GetProductAll, ToggleIsActiveProduct {
+public class ProductServiceImpl implements
+        CreateProduct,
+        UpdateProduct,
+        GetProductById,
+        GetProductAll,
+        ToggleIsActiveProduct,
+        FindByCategoryContaining,
+        FindByCodeContaining,
+        FindByNameContaining {
 
     private final ProductRepositoryPort productRepositoryPort;
 
@@ -40,5 +48,20 @@ public class ProductServiceImpl implements CreateProduct, UpdateProduct, GetProd
     @Override
     public Product toggleIsActiveById(Long id) {
         return productRepositoryPort.toggleIsActiveById(id);
+    }
+
+    @Override
+    public List<Product> findByCategoryContaining(String category) {
+        return productRepositoryPort.findByCategoryContaining(category);
+    }
+
+    @Override
+    public List<Product> findByCodeContaining(String code) {
+        return productRepositoryPort.findByCodeContaining(code);
+    }
+
+    @Override
+    public List<Product> findByNameContaining(String name) {
+        return productRepositoryPort.findByNameContaining(name);
     }
 }

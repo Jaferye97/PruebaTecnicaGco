@@ -11,4 +11,7 @@ public interface ProductRepositoryPort {
     List<Product> getAll();
     Product update(Product product);
     Product toggleIsActiveById(Long id);
+    List<Product> findByCategoryContaining(String category);
+    List<Product> findByNameContaining(String name);
+    List<Product> findByCodeContaining(String code);
 }
