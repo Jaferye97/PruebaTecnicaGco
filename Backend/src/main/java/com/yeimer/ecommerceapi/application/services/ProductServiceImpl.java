@@ -1,10 +1,7 @@
 package com.yeimer.ecommerceapi.application.services;
 
 import com.yeimer.ecommerceapi.application.ports.ProductRepositoryPort;
-import com.yeimer.ecommerceapi.application.useCases.Product.CreateProduct;
-import com.yeimer.ecommerceapi.application.useCases.Product.GetProductAll;
-import com.yeimer.ecommerceapi.application.useCases.Product.GetProductById;
-import com.yeimer.ecommerceapi.application.useCases.Product.UpdateProduct;
+import com.yeimer.ecommerceapi.application.useCases.Product.*;
 import com.yeimer.ecommerceapi.domain.pojos.Product;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProductServiceImpl implements CreateProduct, UpdateProduct, GetProductById, GetProductAll {
+public class ProductServiceImpl implements CreateProduct, UpdateProduct, GetProductById, GetProductAll, ToggleIsActiveProduct {
 
     private final ProductRepositoryPort productRepositoryPort;
 
@@ -38,5 +35,10 @@ public class ProductServiceImpl implements CreateProduct, UpdateProduct, GetProd
     @Override
     public List<Product> getAll() {
         return productRepositoryPort.getAll();
+    }
+
+    @Override
+    public Product toggleIsActiveById(Long id) {
+        return productRepositoryPort.toggleIsActiveById(id);
     }
 }

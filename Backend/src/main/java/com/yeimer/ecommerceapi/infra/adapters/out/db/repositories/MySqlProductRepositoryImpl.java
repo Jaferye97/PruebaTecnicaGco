@@ -49,4 +49,15 @@ public class MySqlProductRepositoryImpl implements ProductRepositoryPort {
         ProductEntity updatedEntity = springProductRepository.save(entity);
         return ProductEntityMapper.toDomain(updatedEntity);
     }
+
+    @Override
+    public Product toggleIsActiveById(Long id) {
+        ProductEntity entity = springProductRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Product not found with id: " + id));
+
+        entity.setActive(!entity.isActive());
+
+        ProductEntity updatedEntity = springProductRepository.save(entity);
+        return ProductEntityMapper.toDomain(updatedEntity);
+    }
 }

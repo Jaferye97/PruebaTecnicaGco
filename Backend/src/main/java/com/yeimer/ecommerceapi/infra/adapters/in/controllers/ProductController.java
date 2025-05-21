@@ -1,9 +1,6 @@
 package com.yeimer.ecommerceapi.infra.adapters.in.controllers;
 
-import com.yeimer.ecommerceapi.application.useCases.Product.CreateProduct;
-import com.yeimer.ecommerceapi.application.useCases.Product.GetProductAll;
-import com.yeimer.ecommerceapi.application.useCases.Product.GetProductById;
-import com.yeimer.ecommerceapi.application.useCases.Product.UpdateProduct;
+import com.yeimer.ecommerceapi.application.useCases.Product.*;
 import com.yeimer.ecommerceapi.domain.pojos.Product;
 import com.yeimer.ecommerceapi.infra.adapters.in.controllers.dto.productDto.ProductDTO;
 import com.yeimer.ecommerceapi.infra.adapters.in.controllers.mapper.ProductMapper;
@@ -20,12 +17,19 @@ public class ProductController {
     private final CreateProduct createProduct;
     private final GetProductAll getProductAll;
     private final UpdateProduct updateProduct;
+    private final ToggleIsActiveProduct toggleIsActiveProduct;
 
-    public ProductController(GetProductById getProductById, CreateProduct createProduct, GetProductAll getProductAll, UpdateProduct updateProduct) {
+    public ProductController(
+            GetProductById getProductById,
+            CreateProduct createProduct,
+            GetProductAll getProductAll,
+            UpdateProduct updateProduct,
+            ToggleIsActiveProduct toggleIsActiveProduct) {
         this.getProductById = getProductById;
         this.createProduct = createProduct;
         this.getProductAll = getProductAll;
         this.updateProduct = updateProduct;
+        this.toggleIsActiveProduct = toggleIsActiveProduct;
     }
 
     @GetMapping("/product/{id}")
@@ -63,5 +67,13 @@ public class ProductController {
         List<ProductDTO> productDTOS = product.stream().map(ProductMapper::toProductDto).toList();
 
         return ResponseEntity.ok(productDTOS);
+    }
+
+    @PostMapping("/product/toggleIsActive/{id}")
+    public ResponseEntity<ProductDTO> toggleIsActive(
+            @PathVariable long id
+    ){
+        Product updatedProduct = toggleIsActiveProduct.toggleIsActiveById(id);
+        return ResponseEntity.ok(ProductMapper.toProductDto(updatedProduct));
     }
 }

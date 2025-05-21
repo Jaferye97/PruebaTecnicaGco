@@ -10,4 +10,5 @@ public interface ProductRepositoryPort {
     Optional<Product> findById(Long id);
     List<Product> getAll();
     Product update(Product product);
+    Product toggleIsActiveById(Long id);
 }
