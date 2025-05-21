@@ -33,7 +33,7 @@ public class MySqlProductRepositoryImpl implements ProductRepositoryPort {
     }
 
     @Override
-    public List<Product> findAll() {
+    public List<Product> getAll() {
         return springProductRepository.findAll()
                 .stream()
                 .map(ProductEntityMapper::toDomain)

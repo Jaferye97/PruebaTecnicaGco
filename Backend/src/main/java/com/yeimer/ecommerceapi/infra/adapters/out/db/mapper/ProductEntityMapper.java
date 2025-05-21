@@ -19,7 +19,8 @@ public class ProductEntityMapper {
 
     public static ProductEntity toEntity(Product domain) {
         ProductEntity entity = new ProductEntity();
-        entity.setId(domain.getId());
+        if(domain.getId() > 0)
+            entity.setId(domain.getId());
         entity.setName(domain.getName());
         entity.setDescription(domain.getDescription());
         entity.setPrice(domain.getPrice());

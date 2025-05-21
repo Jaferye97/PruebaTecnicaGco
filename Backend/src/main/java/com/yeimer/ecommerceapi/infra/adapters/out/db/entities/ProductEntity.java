@@ -25,7 +25,7 @@ public class ProductEntity {
     @Column(name = "precio", nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
-    @Column(nullable = false)
+    @Column(name = "stock",nullable = false)
     private Integer stock;
 
     @Column(name = "categoria", length = 50)
@@ -34,6 +34,11 @@ public class ProductEntity {
     @Column(name = "codigo", nullable = false, unique = true, length = 50)
     private String code;
 
-    @Column(name = "fechaCreacion", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "fechaCreacion", updatable = false)
     private LocalDateTime dateCreation;
+
+    @PrePersist
+    protected void onCreate() {
+        this.dateCreation = LocalDateTime.now();
+    }
 }
