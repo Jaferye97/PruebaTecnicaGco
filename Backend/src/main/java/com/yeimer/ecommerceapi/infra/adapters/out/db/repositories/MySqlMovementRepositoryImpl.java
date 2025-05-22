@@ -4,7 +4,6 @@ import com.yeimer.ecommerceapi.application.ports.MovementRepositoryPort;
 import com.yeimer.ecommerceapi.domain.pojos.Movement;
 import com.yeimer.ecommerceapi.infra.adapters.out.db.entities.MovementEntity;
 import com.yeimer.ecommerceapi.infra.adapters.out.db.mapper.MovementEntityMapper;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -29,9 +28,6 @@ public class MySqlMovementRepositoryImpl implements MovementRepositoryPort {
 
     @Override
     public Movement update(Movement movement) {
-        if (!springMovementRepository.existsById((long) movement.getId())) {
-            throw new EntityNotFoundException("Movement not found with id: " + movement.getId());
-        }
         MovementEntity entity = MovementEntityMapper.toEntity(movement);
         MovementEntity updatedEntity = springMovementRepository.save(entity);
         return MovementEntityMapper.toDomain(updatedEntity);
@@ -43,7 +39,7 @@ public class MySqlMovementRepositoryImpl implements MovementRepositoryPort {
     }
 
     @Override
-    public List<Movement> findAll() {
+    public List<Movement> getAll() {
         return springMovementRepository.findAll()
                 .stream()
                 .map(MovementEntityMapper::toDomain)

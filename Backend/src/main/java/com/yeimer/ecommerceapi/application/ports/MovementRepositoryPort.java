@@ -9,5 +9,5 @@ public interface MovementRepositoryPort {
     Movement save(Movement movement);
     Movement update(Movement movement);
     Optional<Movement> findById(Long id);
-    List<Movement> findAll();
+    List<Movement> getAll();
 }

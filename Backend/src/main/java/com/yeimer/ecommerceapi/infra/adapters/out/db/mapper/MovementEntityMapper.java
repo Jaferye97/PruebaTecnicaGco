@@ -7,6 +7,7 @@ public class MovementEntityMapper {
     public static Movement toDomain(MovementEntity entity) {
         return Movement.builder()
                 .id(entity.getId())
+                .idProduct(entity.getProduct().getId())
                 .amount(entity.getAmount())
                 .type(entity.getType())
                 .description(entity.getDescription())
@@ -16,7 +17,8 @@ public class MovementEntityMapper {
 
     public static MovementEntity toEntity(Movement domain) {
         MovementEntity entity = new MovementEntity();
-        entity.setId(domain.getId());
+        if(domain.getId() > 0)
+            entity.setId(domain.getId());
         entity.setAmount(domain.getAmount());
         entity.setType(domain.getType());
         entity.setDescription(domain.getDescription());
