@@ -1,6 +1,7 @@
 package com.yeimer.ecommerceapi.application.ports;
 
 import com.yeimer.ecommerceapi.domain.pojos.Product;
+import com.yeimer.ecommerceapi.domain.pojos.ProductWithMovement;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,4 +16,5 @@ public interface ProductRepositoryPort {
     List<Product> findByCodeContaining(String code);
     List<Product> findByCode(String code);
     boolean existsById (long id);
+    ProductWithMovement findByIdWithMovements(Long id);
 }

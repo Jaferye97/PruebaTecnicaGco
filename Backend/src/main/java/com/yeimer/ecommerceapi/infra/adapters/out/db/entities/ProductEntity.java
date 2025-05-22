@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -39,6 +40,9 @@ public class ProductEntity {
 
     @Column(name = "activo")
     private boolean isActive;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MovementEntity> movements;
 
     @PrePersist
     protected void onCreate() {

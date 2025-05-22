@@ -2,6 +2,7 @@ package com.yeimer.ecommerceapi.infra.adapters.out.db.repositories;
 
 import com.yeimer.ecommerceapi.application.ports.ProductRepositoryPort;
 import com.yeimer.ecommerceapi.domain.pojos.Product;
+import com.yeimer.ecommerceapi.domain.pojos.ProductWithMovement;
 import com.yeimer.ecommerceapi.infra.adapters.out.db.entities.ProductEntity;
 import com.yeimer.ecommerceapi.infra.adapters.out.db.mapper.ProductEntityMapper;
 import org.springframework.stereotype.Repository;
@@ -79,5 +80,14 @@ public class MySqlProductRepositoryImpl implements ProductRepositoryPort {
     }
 
     @Override
-    public boolean existsById (long id){ return springProductRepository.existsById(id); }
+    public boolean existsById(long id) {
+        return springProductRepository.existsById(id);
+    }
+
+    @Override
+    public ProductWithMovement findByIdWithMovements(Long id) {
+        ProductEntity product = springProductRepository.findByIdWithMovements(id);
+
+        return ProductEntityMapper.toDomainWithMovements(product);
+    }
 }

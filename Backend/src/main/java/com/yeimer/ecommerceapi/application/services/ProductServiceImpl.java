@@ -3,6 +3,7 @@ package com.yeimer.ecommerceapi.application.services;
 import com.yeimer.ecommerceapi.application.ports.ProductRepositoryPort;
 import com.yeimer.ecommerceapi.application.useCases.Product.*;
 import com.yeimer.ecommerceapi.domain.pojos.Product;
+import com.yeimer.ecommerceapi.domain.pojos.ProductWithMovement;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,9 @@ public class ProductServiceImpl implements
         ToggleIsActiveProduct,
         FindByCategoryContaining,
         FindByCodeContaining,
-        FindByNameContaining {
+        FindByNameContaining,
+        FindByIdWithMovements
+{
 
     private final ProductRepositoryPort productRepositoryPort;
 
@@ -40,7 +43,20 @@ public class ProductServiceImpl implements
 
     @Override
     public Optional<Product> findById(Long id) {
+        if(!productRepositoryPort.existsById(id)){
+            throw new EntityNotFoundException("Product not found with id: " + id);
+        }
+
         return productRepositoryPort.findById(id);
+    }
+
+    @Override
+    public ProductWithMovement findByIdWithMovements(Long id){
+        if(!productRepositoryPort.existsById(id)){
+            throw new EntityNotFoundException("Product not found with id: " + id);
+        }
+
+        return productRepositoryPort.findByIdWithMovements(id);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.yeimer.ecommerceapi.infra.adapters.in.controllers;
 import com.yeimer.ecommerceapi.application.useCases.Product.*;
 import com.yeimer.ecommerceapi.domain.pojos.Product;
 import com.yeimer.ecommerceapi.infra.adapters.in.controllers.dto.productDto.ProductDTO;
+import com.yeimer.ecommerceapi.infra.adapters.in.controllers.dto.productDto.ProductWithMovementDTO;
 import com.yeimer.ecommerceapi.infra.adapters.in.controllers.mapper.ProductMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ public class ProductController {
     private final FindByCategoryContaining findByCategoryContaining;
     private final FindByCodeContaining findByCodeContaining;
     private final FindByNameContaining findByNameContaining;
+    private final FindByIdWithMovements findByIdWithMovements;
 
     public ProductController(
             GetProductById getProductById,
@@ -30,7 +32,7 @@ public class ProductController {
             ToggleIsActiveProduct toggleIsActiveProduct,
             FindByCategoryContaining findByCategoryContaining,
             FindByCodeContaining findByCodeContaining,
-            FindByNameContaining findByNameContaining) {
+            FindByNameContaining findByNameContaining, FindByIdWithMovements findByIdWithMovements) {
         this.getProductById = getProductById;
         this.createProduct = createProduct;
         this.getProductAll = getProductAll;
@@ -39,6 +41,7 @@ public class ProductController {
         this.findByCategoryContaining = findByCategoryContaining;
         this.findByCodeContaining = findByCodeContaining;
         this.findByNameContaining = findByNameContaining;
+        this.findByIdWithMovements = findByIdWithMovements;
     }
 
     @GetMapping("/product/{id}")
@@ -46,10 +49,8 @@ public class ProductController {
             @PathVariable long id
     ){
         Optional<Product> product = getProductById.findById(id);
-        if(product.isPresent())
-            return ResponseEntity.ok(ProductMapper.toProductDto(product.orElse(null)));
-        else
-            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(ProductMapper.toProductDto(product.orElse(null)));
     }
 
     @PostMapping("/product")
@@ -114,5 +115,10 @@ public class ProductController {
         List<ProductDTO> productDTOS = product.stream().map(ProductMapper::toProductDto).toList();
 
         return ResponseEntity.ok(productDTOS);
+    }
+
+    @GetMapping("/products/{id}/movements")
+    public ResponseEntity<ProductWithMovementDTO> getProductWithMovements(@PathVariable long id) {
+        return ResponseEntity.ok(ProductMapper.toProductWithMovementDto(findByIdWithMovements.findByIdWithMovements(id)));
     }
 }

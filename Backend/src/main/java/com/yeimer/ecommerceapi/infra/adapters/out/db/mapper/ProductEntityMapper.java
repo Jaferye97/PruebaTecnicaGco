@@ -1,7 +1,11 @@
 package com.yeimer.ecommerceapi.infra.adapters.out.db.mapper;
 
+import com.yeimer.ecommerceapi.domain.pojos.Movement;
 import com.yeimer.ecommerceapi.domain.pojos.Product;
+import com.yeimer.ecommerceapi.domain.pojos.ProductWithMovement;
 import com.yeimer.ecommerceapi.infra.adapters.out.db.entities.ProductEntity;
+
+import java.util.List;
 
 public class ProductEntityMapper {
     public static Product toDomain(ProductEntity entity) {
@@ -31,5 +35,28 @@ public class ProductEntityMapper {
         entity.setDateCreation(domain.getDateCreation());
         entity.setActive(domain.isActive());
         return entity;
+    }
+
+    public static ProductWithMovement toDomainWithMovements(ProductEntity entity) {
+        Product product = Product.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .description(entity.getDescription())
+                .price(entity.getPrice())
+                .stock(entity.getStock())
+                .category(entity.getCategory())
+                .code(entity.getCode())
+                .dateCreation(entity.getDateCreation())
+                .isActive(entity.isActive())
+                .build();
+
+        List<Movement> movements = entity.getMovements().stream()
+                .map(MovementEntityMapper::toDomain)
+                .toList();
+
+        return ProductWithMovement.builder()
+                .product(product)
+                .movements(movements)
+                .build();
     }
 }

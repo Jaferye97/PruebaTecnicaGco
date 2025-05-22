@@ -1,7 +1,11 @@
 package com.yeimer.ecommerceapi.infra.adapters.in.controllers.mapper;
 
 import com.yeimer.ecommerceapi.domain.pojos.Product;
+import com.yeimer.ecommerceapi.domain.pojos.ProductWithMovement;
 import com.yeimer.ecommerceapi.infra.adapters.in.controllers.dto.productDto.ProductDTO;
+import com.yeimer.ecommerceapi.infra.adapters.in.controllers.dto.productDto.ProductWithMovementDTO;
+
+import java.util.stream.Collectors;
 
 
 public class ProductMapper {
@@ -30,6 +34,13 @@ public class ProductMapper {
                 .code(productDTO.getCode())
                 .dateCreation(productDTO.getDateCreation())
                 .isActive(productDTO.isActive())
+                .build();
+    }
+
+    public static ProductWithMovementDTO toProductWithMovementDto(ProductWithMovement product) {
+        return ProductWithMovementDTO.builder()
+                .productDTO(toProductDto(product.getProduct()))
+                .movementDTOList(product.getMovements().stream().map(MovementMapper::toMovementDto).collect(Collectors.toList()))
                 .build();
     }
 }
