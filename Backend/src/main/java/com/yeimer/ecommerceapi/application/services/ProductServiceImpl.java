@@ -61,7 +61,7 @@ public class ProductServiceImpl implements
 
     @Override
     public Product update(Product product) {
-        if(productRepositoryPort.existsById(product.getId())){
+        if(!productRepositoryPort.existsById(product.getId())){
             throw new EntityNotFoundException("Product not found with id: " + product.getId());
         }
 

@@ -41,7 +41,7 @@ public class ProductEntity {
     @Column(name = "activo")
     private boolean isActive;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<MovementEntity> movements;
 
     @PrePersist

@@ -15,4 +15,15 @@ public class MovementMapper {
                 .date(movement.getDate())
                 .build();
     }
+
+    public static Movement toAppObject(MovementDTO movementDTO) {
+        return Movement.builder()
+                .id(movementDTO.getId())
+                .idProduct(movementDTO.getIdProduct())
+                .type(movementDTO.getType())
+                .amount(movementDTO.getAmount())
+                .description(movementDTO.getDescription())
+                .date(movementDTO.getDate())
+                .build();
+    }
 }
