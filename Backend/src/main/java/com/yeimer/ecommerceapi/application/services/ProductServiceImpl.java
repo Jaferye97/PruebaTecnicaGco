@@ -1,6 +1,7 @@
 package com.yeimer.ecommerceapi.application.services;
 
 import com.yeimer.ecommerceapi.application.ports.ProductRepositoryPort;
+import com.yeimer.ecommerceapi.application.services.observers.StockSubject;
 import com.yeimer.ecommerceapi.application.useCases.Product.*;
 import com.yeimer.ecommerceapi.domain.pojos.Product;
 import com.yeimer.ecommerceapi.domain.pojos.ProductWithMovement;
@@ -25,9 +26,18 @@ public class ProductServiceImpl implements
 {
 
     private final ProductRepositoryPort productRepositoryPort;
+    private final StockSubject stockSubject;
 
-    public ProductServiceImpl(ProductRepositoryPort productRepositoryPort) {
+
+    public ProductServiceImpl(ProductRepositoryPort productRepositoryPort, StockSubject stockSubject) {
         this.productRepositoryPort = productRepositoryPort;
+        this.stockSubject = stockSubject;
+    }
+
+    public void checkStock(Product product) {
+        if (product.getStock() <= 20) {
+            stockSubject.notifyLowStock(product);
+        }
     }
 
     @Override

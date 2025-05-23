@@ -53,8 +53,10 @@ public class MovementServiceImpl implements CreateMovement, UpdateMovement, GetM
             product.get().setStock(product.get().getStock() - movement.getAmount());
         }
 
-        Product update = productServiceImpl.update(product.get());
-        return movementRepositoryPort.save(movement);
+        productServiceImpl.update(product.get());
+        Movement createdMovement = movementRepositoryPort.save(movement);
+        productServiceImpl.checkStock(product.get());
+        return createdMovement;
     }
 
     @Override
