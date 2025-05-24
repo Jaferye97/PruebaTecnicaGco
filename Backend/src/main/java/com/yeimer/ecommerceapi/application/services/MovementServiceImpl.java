@@ -12,7 +12,6 @@ import com.yeimer.ecommerceapi.domain.pojos.Product;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
 import java.util.Optional;
