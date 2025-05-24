@@ -4,6 +4,7 @@ import com.yeimer.ecommerceapi.application.useCases.movement.CreateMovement;
 import com.yeimer.ecommerceapi.domain.pojos.Movement;
 import com.yeimer.ecommerceapi.infra.adapters.in.controllers.dto.movementDto.MovementDTO;
 import com.yeimer.ecommerceapi.infra.adapters.in.controllers.mapper.MovementMapper;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,7 @@ public class MovementController {
 
     @PostMapping("/movement")
     public ResponseEntity<MovementDTO> createMovement(
-            @RequestBody MovementDTO movementDTO
+            @RequestBody @Valid MovementDTO movementDTO
     ){
         Movement movement = MovementMapper.toAppObject(movementDTO);
         Movement createdMovement = createMovement.save(movement);
