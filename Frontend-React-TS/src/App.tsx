@@ -1,5 +1,5 @@
 import "./App.css";
-import Layout from "./components/SideBar/layout/Layout";
+import Layout from "./components/layout/Layout";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
