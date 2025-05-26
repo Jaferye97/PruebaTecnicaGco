@@ -45,7 +45,7 @@ export const requestData = async <T>(
         });
       }
 
-      return;
+      return null;
     }
 
     const responseData: T = await response.json();
