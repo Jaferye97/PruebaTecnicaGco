@@ -1,8 +1,7 @@
 import Swal from "sweetalert2";
 import type { ErrorResponseApi } from "../interfaces/responseApiInterfaces";
 
-const messageError =
-  "An incident has occurred, please contact the administrator. Thank you.";
+const messageError = "An incident has occurred, please contact the administrator. Thank you.";
 
 export const requestData = async <T>(
   method: string,
@@ -59,6 +58,7 @@ export const requestData = async <T>(
       showConfirmButton: false,
       timer: 1500,
     });
-    throw new Error(`Error fetching data: ${error}`);
+    console.error(new Error(`Error fetching data: ${error}`));
+    return null;
   }
 };

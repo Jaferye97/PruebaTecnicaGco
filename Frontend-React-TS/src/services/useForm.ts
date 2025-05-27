@@ -38,6 +38,7 @@ export const useForm = <T>(initialState: T) => {
 
   return {
     inputs,
+    setInputs,
     handleChange,
     handleChangeDate,
     handleChangeSelect,
