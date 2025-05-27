@@ -25,7 +25,6 @@ export const requestData = async <T>(
 
       if (errorApi.error == "Internal Server Error") {
         Swal.fire({
-          position: "top-end",
           icon: "warning",
           title: errorApi.message || messageError,
           showConfirmButton: false,
@@ -36,7 +35,6 @@ export const requestData = async <T>(
       if (errorApi.error == "Validation Error") {
         console.log(errorApi);
         Swal.fire({
-          position: "top-end",
           icon: "warning",
           title: "Validation Error",
           showConfirmButton: false,
