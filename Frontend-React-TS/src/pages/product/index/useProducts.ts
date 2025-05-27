@@ -81,10 +81,7 @@ export const useProducts = () => {
     try {
       setLoading(true);
 
-      const result = await requestData<Product>(
-        "post",
-        `/product/toggleIsActive/${id}`
-      );
+      const result = await requestData<Product>("post", `/product/toggleIsActive/${id}`);
 
       if (result != null) {
         const { text } = inputs;
@@ -94,6 +91,14 @@ export const useProducts = () => {
         } else {
           getData();
         }
+
+        Swal.fire({
+          icon: "success",
+          title: "Good",
+          text: "Product updated successfully.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Error calling API:", error);

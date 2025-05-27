@@ -1,9 +1,12 @@
 import { Container, Row, Table, Button, Form } from "react-bootstrap";
-
 import { DotLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom";
+
 import { useProducts } from "./useProducts";
 
 const Products = () => {
+  const navigate = useNavigate();
+
   const { state, stateUpdaters } = useProducts();
   const { loading, data, inputs } = state;
   const { handleChange, submitForm, handleToggle } = stateUpdaters;
@@ -49,34 +52,53 @@ const Products = () => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="textInput" className="form-label">
+            <label
+              htmlFor="textInput"
+              className="form-label"
+            >
               Enter text
             </label>
             <input
               id="textInput"
               type="text"
               className="form-control"
-              placeholder="Type here..."
+              placeholder="Text here..."
               value={text}
               name="text"
               onChange={(e) => handleChange(e)}
             />
           </div>
 
-          <Button variant="primary" type="submit">
-            Submit
+          <Button
+            variant="primary"
+            type="submit"
+          >
+            Search
           </Button>
         </Form>
       </div>
 
+      <div className="mt-4 d-flex justify-content-end mb-3">
+        <Button
+          variant="success"
+          size="sm"
+          onClick={() => navigate("/product/create")}
+        >
+          New Product
+        </Button>
+      </div>
+
       {loading ? (
         <div className="mt-5 d-flex justify-content-center">
-          <DotLoader color="#0d6efd" size={100} />
+          <DotLoader
+            color="#0d6efd"
+            size={100}
+          />
         </div>
       ) : (
-        <>
+        <div className="pb-4">
           <Table
-            className="mt-4 table-striped table-bordered text-nowrap shadow-sm rounded"
+            className="table-striped table-bordered text-nowrap shadow-sm rounded"
             responsive="md"
           >
             <thead className="table-dark">
@@ -88,6 +110,7 @@ const Products = () => {
                 <th className="text-center">Price</th>
                 <th className="text-start">Description</th>
                 <th className="text-center">State</th>
+                <th className="text-center">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -99,7 +122,14 @@ const Products = () => {
                   <td className="text-center">{item.stock}</td>
                   <td className="text-center">${item.price?.toFixed(2)}</td>
                   <td className="text-start">{item.description}</td>
-                  <td className="text-center">
+                  <td className="text-center">{item.active ? "Active" : "Inactive"}</td>
+                  <td className="text-center d-flex gap-3">
+                    <Button
+                      size="sm"
+                      onClick={() => navigate(`/product/${item.id}`)}
+                    >
+                      Edit Product
+                    </Button>
                     <Button
                       variant={item.active ? "danger" : "success"}
                       size="sm"
@@ -112,7 +142,7 @@ const Products = () => {
               ))}
             </tbody>
           </Table>
-        </>
+        </div>
       )}
     </Container>
   );
