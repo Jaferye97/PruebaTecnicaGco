@@ -3,6 +3,7 @@ import Layout from "./components/layout/Layout";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Products from "./pages/product/index/Products";
 import EditProduct from "./pages/product/editProduct/EditProduct";
+import CreateProduct from "./pages/product/createProduct/CreateProduct";
 
 function App() {
   return (
@@ -20,6 +21,10 @@ function App() {
           <Route
             path="/Product/:id"
             element={<EditProduct />}
+          />
+          <Route
+            path="/Product/create"
+            element={<CreateProduct />}
           />
           <Route
             path="/Product/Movement"

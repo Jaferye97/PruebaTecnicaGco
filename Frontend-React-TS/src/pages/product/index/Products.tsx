@@ -73,9 +73,19 @@ const Products = () => {
             variant="primary"
             type="submit"
           >
-            Submit
+            Search
           </Button>
         </Form>
+      </div>
+
+      <div className="mt-4 d-flex justify-content-end mb-3">
+        <Button
+          variant="success"
+          size="sm"
+          onClick={() => navigate("/product/create")}
+        >
+          New Product
+        </Button>
       </div>
 
       {loading ? (
@@ -86,7 +96,7 @@ const Products = () => {
           />
         </div>
       ) : (
-        <div className="pt-4 pb-4">
+        <div className="pb-4">
           <Table
             className="table-striped table-bordered text-nowrap shadow-sm rounded"
             responsive="md"
