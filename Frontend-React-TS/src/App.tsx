@@ -1,8 +1,8 @@
 import "./App.css";
 import Layout from "./components/layout/Layout";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Products from "./pages/product/products/Products";
-import EditProduct from "./pages/product/EditProduct/EditProduct";
+import Products from "./pages/product/index/Products";
+import EditProduct from "./pages/product/editProduct/EditProduct";
 
 function App() {
   return (
