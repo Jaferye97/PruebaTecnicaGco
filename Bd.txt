@@ -1,0 +1,119 @@
+CREATE DATABASE ecommerce;
+
+USE ecommerce;
+
+CREATE TABLE `producto` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `descripcion` text,
+  `precio` decimal(10,2) NOT NULL,
+  `stock` int NOT NULL,
+  `categoria` varchar(50) DEFAULT NULL,
+  `codigo` varchar(50) NOT NULL,
+  `fechaCreacion` datetime DEFAULT NULL,
+  `activo` bool NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `codigo` (`codigo`)
+);
+
+CREATE TABLE `movimiento` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idProducto` int NOT NULL,
+  `tipo` enum('ENTRADA','SALIDA') NOT NULL,
+  `cantidad` int NOT NULL,
+  `fecha` datetime DEFAULT CURRENT_TIMESTAMP,
+  `descripcion` text,
+  PRIMARY KEY (`id`),
+  KEY `idProducto` (`idProducto`),
+  CONSTRAINT `fk_movimiento_producto` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`id`)
+);
+
+-- Insertar productos
+INSERT INTO producto (nombre, descripcion, precio, stock, categoria, codigo, fechaCreacion, activo)
+VALUES 
+-- Categoría: Electrónica
+('Smartphone X1', 'Teléfono inteligente con pantalla AMOLED', 299.99, 20, 'Electrónica', 'ELEC001', NOW(), 1),
+('Laptop Pro', 'Laptop de alto rendimiento', 899.99, 10, 'Electrónica', 'ELEC002', NOW(), 1),
+('Auriculares Bluetooth', 'Auriculares inalámbricos con cancelación de ruido', 59.99, 50, 'Electrónica', 'ELEC003', NOW(), 1),
+
+-- Categoría: Hogar
+('Licuadora 3000', 'Licuadora multifunción con 5 velocidades', 79.99, 15, 'Hogar', 'HOG001', NOW(), 1),
+('Aspiradora Turbo', 'Aspiradora potente y silenciosa', 149.99, 8, 'Hogar', 'HOG002', NOW(), 1),
+('Cafetera Express', 'Cafetera automática para espresso', 129.99, 12, 'Hogar', 'HOG003', NOW(), 1),
+
+-- Categoría: Ropa
+('Camiseta Básica', 'Camiseta 100% algodón', 9.99, 100, 'Ropa', 'ROP001', NOW(), 1),
+('Jeans Slim', 'Pantalones jeans corte slim', 39.99, 40, 'Ropa', 'ROP002', NOW(), 1),
+('Chaqueta Invierno', 'Chaqueta térmica para clima frío', 89.99, 20, 'Ropa', 'ROP003', NOW(), 1),
+
+-- Categoría: Libros
+('Novela Fantástica', 'Libro de fantasía y aventuras', 14.99, 25, 'Libros', 'LIB001', NOW(), 1),
+('Manual SQL', 'Guía práctica para SQL', 24.99, 30, 'Libros', 'LIB002', NOW(), 1),
+('Historia Universal', 'Resumen de la historia global', 19.99, 18, 'Libros', 'LIB003', NOW(), 1),
+
+-- Categoría: Juguetes
+('Bloques de Construcción', 'Set de 500 bloques de plástico', 34.99, 60, 'Juguetes', 'JUG001', NOW(), 1),
+('Muñeca Interactiva', 'Muñeca que habla y canta', 44.99, 25, 'Juguetes', 'JUG002', NOW(), 1),
+('Carro RC', 'Carro a control remoto de alta velocidad', 59.99, 15, 'Juguetes', 'JUG003', NOW(), 1);
+
+INSERT INTO movimiento (idProducto, tipo, cantidad, descripcion)
+VALUES
+-- Producto 1
+(1, 'ENTRADA', 30, 'Compra de stock inicial'),
+(1, 'SALIDA', 10, 'Venta en tienda'),
+
+-- Producto 2
+(2, 'ENTRADA', 15, 'Compra proveedor'),
+(2, 'SALIDA', 5, 'Venta online'),
+
+-- Producto 3
+(3, 'ENTRADA', 60, 'Nuevo lote'),
+(3, 'SALIDA', 10, 'Devolución cliente'),
+
+-- Producto 4
+(4, 'ENTRADA', 20, 'Compra mayorista'),
+(4, 'SALIDA', 5, 'Venta directa'),
+
+-- Producto 5
+(5, 'ENTRADA', 10, 'Stock inicial'),
+(5, 'SALIDA', 2, 'Venta local'),
+
+-- Producto 6
+(6, 'ENTRADA', 15, 'Compra proveedor'),
+(6, 'SALIDA', 3, 'Promoción especial'),
+
+-- Producto 7
+(7, 'ENTRADA', 120, 'Producción nacional'),
+(7, 'SALIDA', 20, 'Ventas varias'),
+
+-- Producto 8
+(8, 'ENTRADA', 50, 'Importación'),
+(8, 'SALIDA', 10, 'Ventas al por mayor'),
+
+-- Producto 9
+(9, 'ENTRADA', 25, 'Temporada de invierno'),
+(9, 'SALIDA', 5, 'Ventas individuales'),
+
+-- Producto 10
+(10, 'ENTRADA', 30, 'Compra editorial'),
+(10, 'SALIDA', 5, 'Venta escolar'),
+
+-- Producto 11
+(11, 'ENTRADA', 40, 'Compra masiva'),
+(11, 'SALIDA', 10, 'Venta librería'),
+
+-- Producto 12
+(12, 'ENTRADA', 20, 'Reabastecimiento'),
+(12, 'SALIDA', 2, 'Ventas menores'),
+
+-- Producto 13
+(13, 'ENTRADA', 70, 'Fabricación'),
+(13, 'SALIDA', 10, 'Temporada navideña'),
+
+-- Producto 14
+(14, 'ENTRADA', 30, 'Compra mayorista'),
+(14, 'SALIDA', 5, 'Ventas minoristas'),
+
+-- Producto 15
+(15, 'ENTRADA', 20, 'Stock inicial'),
+(15, 'SALIDA', 5, 'Promoción y regalos');
