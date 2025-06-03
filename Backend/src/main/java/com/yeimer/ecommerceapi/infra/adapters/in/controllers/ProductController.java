@@ -31,6 +31,7 @@ public class ProductController {
     private final FindByCodeContaining findByCodeContaining;
     private final FindByNameContaining findByNameContaining;
     private final FindByIdWithMovements findByIdWithMovements;
+    private final FindByCodeContainingAndActiveIsTrue findByCodeContainingAndActiveIsTrue;
 
     public ProductController(
             GetProductById getProductById,
@@ -40,7 +41,7 @@ public class ProductController {
             ToggleIsActiveProduct toggleIsActiveProduct,
             FindByCategoryContaining findByCategoryContaining,
             FindByCodeContaining findByCodeContaining,
-            FindByNameContaining findByNameContaining, FindByIdWithMovements findByIdWithMovements) {
+            FindByNameContaining findByNameContaining, FindByIdWithMovements findByIdWithMovements, FindByCodeContainingAndActiveIsTrue findByCodeContainingAndActiveIsTrue) {
         this.getProductById = getProductById;
         this.createProduct = createProduct;
         this.getProductAll = getProductAll;
@@ -50,6 +51,7 @@ public class ProductController {
         this.findByCodeContaining = findByCodeContaining;
         this.findByNameContaining = findByNameContaining;
         this.findByIdWithMovements = findByIdWithMovements;
+        this.findByCodeContainingAndActiveIsTrue = findByCodeContainingAndActiveIsTrue;
     }
 
     @Operation(
@@ -264,6 +266,33 @@ public class ProductController {
             @PathVariable String code
     ){
         List<Product> product = findByCodeContaining.findByCodeContaining(code);
+        List<ProductDTO> productDTOS = product.stream().map(ProductMapper::toProductDto).toList();
+
+        return ResponseEntity.ok(productDTOS);
+    }
+
+    @Operation(
+            summary = "Find products by code and state is active",
+            description = "Returns a list of products whose code contains the given text (case-insensitive)."
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "Products found successfully",
+            content = @Content(
+                    mediaType = "application/json",
+                    array = @ArraySchema(schema = @Schema(implementation = ProductDTO.class))
+            )
+    )
+    @ApiResponse(
+            responseCode = "500",
+            description = "Internal server error",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+    )
+    @GetMapping("/product/findByCodeAndIsActive/{code}")
+    public ResponseEntity<List<ProductDTO>> findByCodeContainingAndActiveIsTrue(
+            @PathVariable String code
+    ){
+        List<Product> product = findByCodeContainingAndActiveIsTrue.findByCodeContainingAndActiveIsTrue(code);
         List<ProductDTO> productDTOS = product.stream().map(ProductMapper::toProductDto).toList();
 
         return ResponseEntity.ok(productDTOS);
