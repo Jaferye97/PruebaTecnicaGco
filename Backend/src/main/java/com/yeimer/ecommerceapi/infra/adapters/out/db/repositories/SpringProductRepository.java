@@ -16,6 +16,9 @@ public interface SpringProductRepository extends JpaRepository<ProductEntity, Lo
 
     List<ProductEntity> findByCode(String code);
 
+    @Query("SELECT p FROM ProductEntity p WHERE p.code LIKE %:code% AND p.isActive = :state")
+    List<ProductEntity> findByCodeContainingAndIsActive(String code, boolean state);
+
     @Query("SELECT p FROM ProductEntity p LEFT JOIN FETCH p.movements WHERE p.id = :id")
     ProductEntity findByIdWithMovements(@Param("id") Long id);
 }

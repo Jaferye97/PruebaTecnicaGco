@@ -65,6 +65,14 @@ public class MySqlProductRepositoryImpl implements ProductRepositoryPort {
     }
 
     @Override
+    public List<Product> findByCodeContainingAndIsActive(String code, boolean state) {
+        return springProductRepository.findByCodeContainingAndIsActive(code, state)
+                .stream()
+                .map(ProductEntityMapper::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Product update(Product product) {
         ProductEntity entity = ProductEntityMapper.toEntity(product);
         ProductEntity updatedEntity = springProductRepository.save(entity);

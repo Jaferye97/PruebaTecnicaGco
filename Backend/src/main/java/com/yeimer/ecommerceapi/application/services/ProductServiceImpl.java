@@ -20,6 +20,7 @@ public class ProductServiceImpl implements
         GetProductAll,
         ToggleIsActiveProduct,
         FindByCategoryContaining,
+        FindByCodeContainingAndActiveIsTrue,
         FindByCodeContaining,
         FindByNameContaining,
         FindByIdWithMovements
@@ -109,6 +110,11 @@ public class ProductServiceImpl implements
     @Override
     public List<Product> findByCodeContaining(String code) {
         return productRepositoryPort.findByCodeContaining(code);
+    }
+
+    @Override
+    public List<Product> findByCodeContainingAndActiveIsTrue(String code) {
+        return productRepositoryPort.findByCodeContainingAndIsActive(code, true);
     }
 
     @Override
