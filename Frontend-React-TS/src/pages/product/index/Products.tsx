@@ -1,7 +1,7 @@
 import { Container, Row, Table, Button, Form, Dropdown } from "react-bootstrap";
 import { DotLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
-import { FaEllipsisV, FaEdit, FaPowerOff } from "react-icons/fa";
+import { FaEllipsisV, FaEdit, FaPowerOff, FaBook } from "react-icons/fa";
 
 import { useProducts } from "./useProducts";
 
@@ -144,6 +144,10 @@ const Products = () => {
                             className={`me-2 ${item.active ? "text-danger" : "text-success"}`}
                           />
                           {item.active ? "Deactivate" : "Activate"}
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={() => navigate(`/product/${item.id}/movement`)}>
+                          <FaBook className="me-2" />
+                          See Movement
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>

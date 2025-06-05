@@ -320,7 +320,7 @@ public class ProductController {
             description = "Internal server error",
             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
     )
-    @GetMapping("/products/{id}/movements")
+    @GetMapping("/product/{id}/movements")
     public ResponseEntity<ProductWithMovementDTO> getProductWithMovements(@PathVariable long id) {
         return ResponseEntity.ok(ProductMapper.toProductWithMovementDto(findByIdWithMovements.findByIdWithMovements(id)));
     }
