@@ -39,8 +39,8 @@ public class ProductMapper {
 
     public static ProductWithMovementDTO toProductWithMovementDto(ProductWithMovement product) {
         return ProductWithMovementDTO.builder()
-                .productDTO(toProductDto(product.getProduct()))
-                .movementDTOList(product.getMovements().stream().map(MovementMapper::toMovementDto).collect(Collectors.toList()))
+                .product(toProductDto(product.getProduct()))
+                .movements(product.getMovements().stream().map(MovementMapper::toMovementDto).collect(Collectors.toList()))
                 .build();
     }
 }

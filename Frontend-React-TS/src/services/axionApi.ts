@@ -1,8 +1,7 @@
 import Swal from "sweetalert2";
 import type { ErrorResponseApi } from "../interfaces/responseApiInterfaces";
 
-const messageError =
-  "An incident has occurred, please contact the administrator. Thank you.";
+const messageError = "An incident has occurred, please contact the administrator. Thank you.";
 
 export const requestData = async <T>(
   method: string,
@@ -26,7 +25,6 @@ export const requestData = async <T>(
 
       if (errorApi.error == "Internal Server Error") {
         Swal.fire({
-          position: "top-end",
           icon: "warning",
           title: errorApi.message || messageError,
           showConfirmButton: false,
@@ -37,7 +35,6 @@ export const requestData = async <T>(
       if (errorApi.error == "Validation Error") {
         console.log(errorApi);
         Swal.fire({
-          position: "top-end",
           icon: "warning",
           title: "Validation Error",
           showConfirmButton: false,
@@ -59,6 +56,7 @@ export const requestData = async <T>(
       showConfirmButton: false,
       timer: 1500,
     });
-    throw new Error(`Error fetching data: ${error}`);
+    console.error(new Error(`Error fetching data: ${error}`));
+    return null;
   }
 };

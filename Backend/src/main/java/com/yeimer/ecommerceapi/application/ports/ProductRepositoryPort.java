@@ -14,6 +14,7 @@ public interface ProductRepositoryPort {
     List<Product> findByCategoryContaining(String category);
     List<Product> findByNameContaining(String name);
     List<Product> findByCodeContaining(String code);
+    List<Product> findByCodeContainingAndIsActive(String code, boolean state);
     List<Product> findByCode(String code);
     boolean existsById (long id);
     ProductWithMovement findByIdWithMovements(Long id);

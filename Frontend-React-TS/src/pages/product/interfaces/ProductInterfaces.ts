@@ -9,3 +9,17 @@ export default class Product {
   dateCreation?: string;
   active?: boolean;
 }
+
+export interface Movement {
+  id?: number;
+  idProduct?: number;
+  type?: "ENTRADA" | "SALIDA";
+  amount?: number;
+  date?: string;
+  description?: string;
+}
+
+export interface MovementsProduct {
+  product?: Product;
+  movements?: Movement[];
+}
