@@ -11,6 +11,6 @@ import java.util.List;
 @Setter
 @Builder
 public class ProductWithMovementDTO {
-    private ProductDTO productDTO;
-    private List<MovementDTO> movementDTOList;
+    private ProductDTO product;
+    private List<MovementDTO> movements;
 }

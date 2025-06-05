@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Products from "./pages/product/index/Products";
 import EditProduct from "./pages/product/editProduct/EditProduct";
 import CreateProduct from "./pages/product/createProduct/CreateProduct";
+import Movement from "./pages/product/movement/Movement";
 
 function App() {
   return (
@@ -27,8 +28,8 @@ function App() {
             element={<CreateProduct />}
           />
           <Route
-            path="/Product/Movement"
-            element={<h1>Movement Product</h1>}
+            path="/Product/:id/Movement"
+            element={<Movement />}
           />
         </Route>
       </Routes>

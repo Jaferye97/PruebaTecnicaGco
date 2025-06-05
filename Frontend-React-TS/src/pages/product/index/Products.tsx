@@ -1,6 +1,7 @@
-import { Container, Row, Table, Button, Form } from "react-bootstrap";
+import { Container, Row, Table, Button, Form, Dropdown } from "react-bootstrap";
 import { DotLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
+import { FaEllipsisV, FaEdit, FaPowerOff, FaBook } from "react-icons/fa";
 
 import { useProducts } from "./useProducts";
 
@@ -123,20 +124,33 @@ const Products = () => {
                   <td className="text-center">${item.price?.toFixed(2)}</td>
                   <td className="text-start">{item.description}</td>
                   <td className="text-center">{item.active ? "Active" : "Inactive"}</td>
-                  <td className="text-center d-flex gap-3">
-                    <Button
-                      size="sm"
-                      onClick={() => navigate(`/product/${item.id}`)}
-                    >
-                      Edit Product
-                    </Button>
-                    <Button
-                      variant={item.active ? "danger" : "success"}
-                      size="sm"
-                      onClick={() => handleToggle(item.id || 0)}
-                    >
-                      {item.active ? "Deactivate" : "Activate"}
-                    </Button>
+                  <td>
+                    <Dropdown align="end">
+                      <Dropdown.Toggle
+                        variant="light"
+                        size="sm"
+                        className="border-0"
+                      >
+                        <FaEllipsisV />
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => navigate(`/product/${item.id}`)}>
+                          <FaEdit className="me-2" />
+                          Edit Product
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleToggle(item.id || 0)}>
+                          <FaPowerOff
+                            className={`me-2 ${item.active ? "text-danger" : "text-success"}`}
+                          />
+                          {item.active ? "Deactivate" : "Activate"}
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={() => navigate(`/product/${item.id}/movement`)}>
+                          <FaBook className="me-2" />
+                          See Movement
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
                   </td>
                 </tr>
               ))}
