@@ -1,0 +1,28 @@
+<div class="sidebar bg-white border-end vh-100">
+  <div class="p-3">
+    <h5 class="fw-bold mb-4">Super DeUno</h5>
+
+    <!-- Product Menu -->
+    <div>
+      <button
+        class="btn w-100 text-start fw-semibold mb-2"
+        (click)="toggleProductMenu()"
+        [class.active]="productMenuOpen"
+      >
+        Product
+      </button>
+      <div *ngIf="productMenuOpen" class="ps-3">
+        <a
+          routerLink="/products"
+          class="d-block py-1 text-decoration-none text-dark"
+          >Products</a
+        >
+        <a
+          routerLink="/movement-product"
+          class="d-block py-1 text-decoration-none text-dark"
+          >Movement Product</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
