@@ -6,9 +6,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./sidebar.component.css'], // ← CSS, no SCSS
 })
 export class SidebarComponent {
-  productMenuOpen = true;
+  activeSection: string | null = null;
 
-  toggleProductMenu() {
-    this.productMenuOpen = !this.productMenuOpen;
+  menu = [
+    {
+      title: 'Product',
+      key: 'product',
+      items: [
+        { name: 'Products', route: '/product' },
+        { name: 'Movement Product', route: '/product/movement' },
+      ],
+    },
+  ];
+
+  toggleSection(key: string) {
+    this.activeSection = this.activeSection === key ? null : key;
   }
 }
