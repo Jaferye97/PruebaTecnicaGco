@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css'], // ← CSS, no SCSS
+  styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent {
   activeSection: string | null = null;
@@ -12,6 +12,7 @@ export class SidebarComponent {
     {
       title: 'Product',
       key: 'product',
+      icon: 'storage',
       items: [
         { name: 'Products', route: '/product' },
         { name: 'Movement Product', route: '/product/movement' },

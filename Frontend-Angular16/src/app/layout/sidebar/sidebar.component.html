@@ -1,33 +1,17 @@
-<div
-  class="d-flex flex-column p-3 bg-light"
-  style="width: 250px; height: 100vh"
->
-  <h5 class="mb-3">Super DeUno</h5>
-  <ul class="nav nav-pills flex-column mb-auto">
-    <li *ngFor="let section of menu">
-      <button
-        class="btn btn-toggle align-items-center rounded collapsed w-100 text-start fw-bold text-secondary ps-2"
-        (click)="toggleSection(section.key)"
+<mat-nav-list>
+  <ng-container *ngFor="let section of menu">
+    <mat-list-item (click)="toggleSection(section.key)" style="cursor: pointer">
+      <mat-icon>{{ section.icon }}</mat-icon>
+      {{ section.title }}
+    </mat-list-item>
+    <div *ngIf="activeSection === section.key" class="ps-3">
+      <a
+        mat-list-item
+        *ngFor="let item of section.items"
+        [routerLink]="item.route"
       >
-        {{ section.title }}
-        <span class="float-end">{{
-          activeSection === section.key ? "▼" : "▶"
-        }}</span>
-      </button>
-      <ul
-        *ngIf="activeSection === section.key"
-        class="nav flex-column ms-3 mb-2 mt-1"
-      >
-        <li *ngFor="let item of section.items" class="nav-item">
-          <a
-            class="nav-link link-dark ps-3"
-            [routerLink]="item.route"
-            routerLinkActive="active"
-          >
-            {{ item.name }}
-          </a>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</div>
+        {{ item.name }}
+      </a>
+    </div>
+  </ng-container>
+</mat-nav-list>
