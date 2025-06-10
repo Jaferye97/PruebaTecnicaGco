@@ -12,17 +12,6 @@ export class IndexComponent {
   loading = true;
   products: Product[] = [];
 
-  displayedColumns: string[] = [
-    'code',
-    'name',
-    'category',
-    'stock',
-    'price',
-    'description',
-    'active',
-    'action',
-  ];
-
   inputs = {
     option: '',
     text: '',
@@ -64,5 +53,13 @@ export class IndexComponent {
         this.products = res;
         this.loading = false;
       });
+  }
+
+  handleToggle(id: number) {
+    this.loading = true;
+    this.service.ToggleState(id).subscribe(() => {
+      Swal.fire('Success', 'Product updated successfully.', 'success');
+      this.getAllData();
+    });
   }
 }

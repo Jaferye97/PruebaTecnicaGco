@@ -33,4 +33,11 @@ export class ProductService {
 
     return this.http.get<Product[]>(url);
   }
+
+  ToggleState(id: number): Observable<any> {
+    return this.http.post(
+      `${environment.urlInicial}${urlServicios.product}/toggleIsActive/${id}`,
+      {}
+    );
+  }
 }
