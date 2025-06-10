@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Product } from '../interfaces/productInterfaces';
 import { ProductService } from '../services/product.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-index',
@@ -22,10 +23,19 @@ export class IndexComponent {
     'action',
   ];
 
+  inputs = {
+    option: '',
+    text: '',
+  };
+
   constructor(private service: ProductService) {}
 
   ngOnInit() {
     this.getAllData();
+  }
+
+  submitForm() {
+    this.getDataFilter();
   }
 
   getAllData() {
@@ -34,5 +44,25 @@ export class IndexComponent {
       this.products = res;
       this.loading = false;
     });
+  }
+
+  getDataFilter() {
+    if (!this.inputs.text) {
+      Swal.fire('Error', 'Please enter text to search.', 'error');
+      return;
+    }
+
+    if (!this.inputs.option) {
+      Swal.fire('Error', 'Please select option to search.', 'error');
+      return;
+    }
+
+    this.loading = true;
+    this.service
+      .Search(this.inputs.option, this.inputs.text)
+      .subscribe((res) => {
+        this.products = res;
+        this.loading = false;
+      });
   }
 }

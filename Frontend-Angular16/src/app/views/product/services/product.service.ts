@@ -15,4 +15,22 @@ export class ProductService {
     const urlConsulta = `${environment.urlInicial}${urlServicios.product}`;
     return this.http.get<Product[]>(urlConsulta);
   }
+
+  Search(option: string, text: string): Observable<any[]> {
+    let url = `${environment.urlInicial}${urlServicios.product}`;
+
+    switch (option) {
+      case 'Code':
+        url += `/findByCode/${text}`;
+        break;
+      case 'Category':
+        url += `/findByCategory/${text}`;
+        break;
+      case 'Name':
+        url += `/findByName/${text}`;
+        break;
+    }
+
+    return this.http.get<Product[]>(url);
+  }
 }

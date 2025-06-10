@@ -1,5 +1,25 @@
 <mat-card>
   <h3 class="text-center">Products</h3>
+
+  <form (ngSubmit)="submitForm()" class="mb-4">
+    <label>Search option:</label>
+    <mat-radio-group [(ngModel)]="inputs.option" name="option">
+      <mat-radio-button value="Code">Code</mat-radio-button>
+      <mat-radio-button value="Category">Category</mat-radio-button>
+      <mat-radio-button value="Name">Name</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field class="w-100 mt-3">
+      <input
+        matInput
+        placeholder="Text here..."
+        [(ngModel)]="inputs.text"
+        name="text"
+      />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Search</button>
+  </form>
 </mat-card>
 
 <div *ngIf="loading" class="text-center mt-5">
