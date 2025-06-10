@@ -11,10 +11,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProductRoutingModule } from './product-routing.module';
+import { EditarComponent } from './editar/editar.component';
 
 @NgModule({
-  declarations: [IndexComponent],
+  declarations: [IndexComponent, EditarComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -29,6 +31,7 @@ import { ProductRoutingModule } from './product-routing.module';
     MatMenuModule,
     MatCardModule,
     ProductRoutingModule,
+    MatCheckboxModule,
   ],
 })
 export class ProductModule {}

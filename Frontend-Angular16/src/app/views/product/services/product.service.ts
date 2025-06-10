@@ -34,10 +34,23 @@ export class ProductService {
     return this.http.get<Product[]>(url);
   }
 
-  ToggleState(id: number): Observable<any> {
+  ToggleState(id: number): Observable<Product> {
     return this.http.post(
       `${environment.urlInicial}${urlServicios.product}/toggleIsActive/${id}`,
       {}
+    );
+  }
+
+  GetProduct(id: number): Observable<Product> {
+    return this.http.get(
+      `${environment.urlInicial}${urlServicios.product}/${id}`
+    );
+  }
+
+  UpdateProduct(product: Product): Observable<Product> {
+    return this.http.put(
+      `${environment.urlInicial}${urlServicios.product}/update`,
+      product
     );
   }
 }

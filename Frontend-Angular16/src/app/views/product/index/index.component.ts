@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Product } from '../interfaces/productInterfaces';
 import { ProductService } from '../services/product.service';
 import Swal from 'sweetalert2';
@@ -17,7 +19,7 @@ export class IndexComponent {
     text: '',
   };
 
-  constructor(private service: ProductService) {}
+  constructor(private service: ProductService, private router: Router) {}
 
   ngOnInit() {
     this.getAllData();
@@ -61,5 +63,9 @@ export class IndexComponent {
       Swal.fire('Success', 'Product updated successfully.', 'success');
       this.getAllData();
     });
+  }
+
+  navigateToEdit(id: number) {
+    this.router.navigate([`/product/${id}`]);
   }
 }
