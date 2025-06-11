@@ -1,0 +1,17 @@
+<mat-nav-list>
+  <ng-container *ngFor="let section of menu">
+    <mat-list-item (click)="toggleSection(section.key)" style="cursor: pointer">
+      <mat-icon>{{ section.icon }}</mat-icon>
+      {{ section.title }}
+    </mat-list-item>
+    <div *ngIf="activeSection === section.key" class="ps-3">
+      <a
+        mat-list-item
+        *ngFor="let item of section.items"
+        [routerLink]="item.route"
+      >
+        {{ item.name }}
+      </a>
+    </div>
+  </ng-container>
+</mat-nav-list>

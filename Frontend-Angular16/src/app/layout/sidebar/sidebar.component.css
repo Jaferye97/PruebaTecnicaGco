@@ -1,0 +1,7 @@
+.mat-list-item {
+  font-weight: bold;
+}
+a.mat-list-item {
+  font-weight: normal;
+  padding-left: 16px;
+}
