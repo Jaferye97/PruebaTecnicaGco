@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { urlServicios } from '../../../../environments/url-servicios';
 import { Observable } from 'rxjs';
-import { Product } from '../interfaces/productInterfaces';
+import { Product, MovementsProduct } from '../interfaces/productInterfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -44,6 +44,12 @@ export class ProductService {
   GetProduct(id: number): Observable<Product> {
     return this.http.get(
       `${environment.urlInicial}${urlServicios.product}/${id}`
+    );
+  }
+
+  GetProductWithMovement(id: number): Observable<MovementsProduct> {
+    return this.http.get(
+      `${environment.urlInicial}${urlServicios.product}/${id}/movements`
     );
   }
 

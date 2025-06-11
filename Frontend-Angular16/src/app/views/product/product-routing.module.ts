@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IndexComponent } from './index/index.component';
 import { EditarComponent } from './editar/editar.component';
 import { CrearComponent } from './crear/crear.component';
+import { MovementComponent } from './movement/movement.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'crear',
     component: CrearComponent,
+  },
+  {
+    path: ':id/movement',
+    component: MovementComponent,
   },
   {
     path: ':id',

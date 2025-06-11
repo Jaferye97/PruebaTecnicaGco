@@ -70,7 +70,10 @@ export class IndexComponent {
   }
 
   navigateToCreate() {
-    console.log('/product/crear');
     this.router.navigate(['/product/crear']);
+  }
+
+  navigateToMovement(id: number) {
+    this.router.navigate([`/product/${id}/movement`]);
   }
 }

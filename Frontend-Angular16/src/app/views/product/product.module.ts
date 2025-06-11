@@ -15,9 +15,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProductRoutingModule } from './product-routing.module';
 import { EditarComponent } from './editar/editar.component';
 import { CrearComponent } from './crear/crear.component';
+import { MovementComponent } from './movement/movement.component';
 
 @NgModule({
-  declarations: [IndexComponent, EditarComponent, CrearComponent],
+  declarations: [IndexComponent, EditarComponent, CrearComponent, MovementComponent],
   imports: [
     CommonModule,
     FormsModule,

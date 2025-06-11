@@ -86,8 +86,7 @@
             }}</mat-icon>
             <span>{{ product.active ? "Deactivate" : "Activate" }}</span>
           </button>
-          <!-- <button mat-menu-item (click)="navigateToMovement(mov.idRegistro)"> -->
-          <button mat-menu-item>
+          <button mat-menu-item (click)="navigateToMovement(product.id || 0)">
             <mat-icon>history</mat-icon>
             <span>See Movement</span>
           </button>
