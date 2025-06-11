@@ -68,4 +68,9 @@ export class IndexComponent {
   navigateToEdit(id: number) {
     this.router.navigate([`/product/${id}`]);
   }
+
+  navigateToCreate() {
+    console.log('/product/crear');
+    this.router.navigate(['/product/crear']);
+  }
 }

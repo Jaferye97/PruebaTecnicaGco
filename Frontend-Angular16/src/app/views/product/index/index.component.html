@@ -22,6 +22,12 @@
   </form>
 </mat-card>
 
+<div class="text-end my-3">
+  <button mat-raised-button color="primary" (click)="navigateToCreate()">
+    New Product
+  </button>
+</div>
+
 <div
   *ngIf="loading"
   class="d-flex justify-content-center align-items-center"

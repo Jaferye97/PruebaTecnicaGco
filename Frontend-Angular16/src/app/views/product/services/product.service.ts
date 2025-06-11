@@ -53,4 +53,11 @@ export class ProductService {
       product
     );
   }
+
+  CreateProduct(product: Product): Observable<Product> {
+    return this.http.post(
+      `${environment.urlInicial}${urlServicios.product}`,
+      product
+    );
+  }
 }

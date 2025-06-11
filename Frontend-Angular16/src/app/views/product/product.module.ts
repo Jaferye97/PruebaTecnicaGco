@@ -14,9 +14,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProductRoutingModule } from './product-routing.module';
 import { EditarComponent } from './editar/editar.component';
+import { CrearComponent } from './crear/crear.component';
 
 @NgModule({
-  declarations: [IndexComponent, EditarComponent],
+  declarations: [IndexComponent, EditarComponent, CrearComponent],
   imports: [
     CommonModule,
     FormsModule,
